@@ -11,12 +11,14 @@ import useLoginModel from "@/app/hooks/useLoginModel";
 import useRentModel from "@/app/hooks/useRentModel";
 
 import { SafeUser } from "@/app/types";
+import { useRouter } from "next/navigation";
 
 interface UserMenuProps {
   currentUser?: SafeUser | null;
 }
 
 const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
+  const router = useRouter();
   const registerModel = useRegisterModel();
   const loginModel = useLoginModel();
   const rentModel = useRentModel();
@@ -58,7 +60,10 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
           <div className="flex flex-col cursor-pointer">
             {currentUser ? (
               <>
-                <MenuItems onClick={() => {}} label="My Trips" />
+                <MenuItems
+                  onClick={() => router.push("/trips")}
+                  label="My Trips"
+                />
                 <MenuItems onClick={() => {}} label="My Reservations" />
                 <MenuItems onClick={() => {}} label="My Favorites" />
                 <MenuItems onClick={rentModel.onOpen} label="AirBnb my home" />
